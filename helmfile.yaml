@@ -1,0 +1,7 @@
+environments:
+  development:
+  production:
+
+helmfiles:
+  - ./sealed-secrets/helmfile.yaml
+  - ./argocd/helmfile.yaml
