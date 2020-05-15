@@ -4,11 +4,7 @@ repositories:
 
 environments:
   development:
-    values:
-    - environments/development.yaml
   production:
-    values:
-    - environments/production.yaml
 
 releases:
   - name: argocd
@@ -17,7 +13,3 @@ releases:
     version: 2.3.2
     values:
     - values.yaml
-    - configs:
-        secret:
-          # `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
-          argocdServerAdminPassword: {{ .Values | getOrNil "adminPass" }}
