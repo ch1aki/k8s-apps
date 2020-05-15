@@ -8,7 +8,7 @@ repoServer:
     image: alpine:3.7
     command: [sh, -c]
     args:
-    - wget -qO /custom-tools/helmfile https://github.com/roboll/helmfile/releases/download/v0.102.0/helmfile_linux_amd64 &&
+    - wget -qO /custom-tools/helmfile https://github.com/roboll/helmfile/releases/download/v0.116.0/helmfile_linux_amd64 &&
       chmod +x /custom-tools/*
     volumeMounts:
     - mountPath: /custom-tools
