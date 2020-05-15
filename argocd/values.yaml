@@ -2,36 +2,8 @@ configs:
   secret:
     argocdServerAdminPasswordMtime: "2006-01-02T15:04:05Z"
 
-repoServer:
-  initContainers:
-  - name: download-tools
-    image: alpine:3.7
-    command: [sh, -c]
-    args:
-    - wget -qO /custom-tools/helmfile https://github.com/roboll/helmfile/releases/download/v0.116.0/helmfile_linux_amd64 &&
-      chmod +x /custom-tools/*
-    volumeMounts:
-    - mountPath: /custom-tools
-      name: custom-tools
-  volumes:
-    - name: custom-tools
-      emptyDir: {}
-  volumeMounts:
-    - name: custom-tools
-      mountPath: /usr/local/bin/helmfile
-      subPath: helmfile
-
 server:
   extraArgs:
   - --insecure
   certificate:
     domain: argocd.akichan.tokyo
-  config:
-    configManagementPlugins: |
-      - name: helmfile
-        init:
-          command: ["sh", "-c"]
-          args: ["helm init --client-only && helmfile repos"]
-        generate:
-          command: ["sh", "-c"]
-          args: ["helmfile --environment $ENVIRONMENT --namespace $ARGOCD_APP_NAMESPACE template | sed -e '1,/---/d' | sed -e 's|apiregistration.k8s.io/v1beta1|apiregistration.k8s.io/v1|g'"]
