@@ -22,6 +22,10 @@ repoServer:
       subPath: helmfile
 
 server:
+  extraArgs:
+  - --insecure
+  certificate:
+    domain: argocd.akichan.tokyo
   config:
     configManagementPlugins: |
       - name: helmfile

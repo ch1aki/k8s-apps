@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: argocd-akichan-tokyo
+  namespace: argocd
+spec:
+  secretName: argocd-akichan-tokyo-prod-tls
+  commonName: argocd.akichan.tokyo
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  dnsNames:
+  - argocd.akichan.tokyo
+  acme:
+    config:
+    - dns01:
+        provider: cf-dns
+      domains:
+        - argocd.akichan.tokyo
+
