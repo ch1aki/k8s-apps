@@ -11,8 +11,8 @@ server:
     configManagementPlugins: |
       - name: helmfile
         generate:
-          command: ["helmfile"]
-          args: ["template"]
+          command: ["/bin/sh", "-c"]
+          args: ["helmfile --namespace $ARGOCD_APP_NAMESPACE --environment $HELMFILE_ENVIRONMENT template"]
 
 repoServer:
   volumes:
